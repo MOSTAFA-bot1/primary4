@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive dictation practice for Contemporary English 4B vocabulary">
+    <title>Dictation Practice - Contemporary English 4B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('themePreference');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" aria-label="Contemporary English 4B - Home">
+                <span class="logo-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        <path d="M8 10h8"/>
+                        <path d="M8 14h5"/>
+                    </svg>
+                </span>
+                <div class="logo-text">
+                    <span class="logo-main">Contemporary English 4B</span>
+                    <span class="logo-sub">First Term 2027</span>
+                </div>
+            </a>
+            <div class="header-actions">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+                    <span aria-hidden="true">🌙</span>
+                    <span>Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <ul class="nav-list" role="list">
+                <li class="nav-item"><a href="index.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🏠</span>Home</a></li>
+                <li class="nav-item"><a href="vocabulary.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📚</span>Vocabulary</a></li>
+                <li class="nav-item"><a href="units.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📋</span>Units</a></li>
+                <li class="nav-item"><a href="dictation.html" class="nav-link active"><span class="nav-icon" aria-hidden="true">🎯</span>Dictation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content" role="main">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">Vocabulary Flashcards</h1>
+                <p class="page-subtitle">Learn and memorize vocabulary with interactive flashcards. Select a unit and lesson to begin.</p>
+            </header>
+
+            <!-- Mode Selection Buttons (Top) -->
+            <div class="mode-selector-top">
+                <button type="button" class="mode-btn btn btn-primary btn-lg" id="btn-vocab" data-mode="vocab">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="6" y1="8" x2="18" y2="8"></line><line x1="6" y1="12" x2="14" y2="12"></line><line x1="6" y1="16" x2="10" y2="16"></line></svg>
+                    <span>✍️ Practice</span>
+                </button>
+                <button type="button" class="mode-btn btn btn-secondary btn-lg" id="btn-practice" data-mode="practice">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    <span>🎯 Dictation</span>
+                </button>
+            </div>
+
+            <!-- Setup Section -->
+            <section class="dictation-setup card" id="setup-section" aria-labelledby="setup-title">
+                <div class="setup-header">
+                    <h2 id="setup-title" class="card-title">Configure Your Practice</h2>
+                    <p class="card-subtitle">Select the vocabulary lesson you want to practice.</p>
+                </div>
+                
+                <form class="setup-form" id="setup-form" onsubmit="startSession(event)">
+                    <div class="form-group">
+                        <label for="unit-select" class="form-label">Unit</label>
+                        <select id="unit-select" class="form-select" required aria-required="true">
+                            <option value="">Choose a unit...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lesson-select" class="form-label">Lesson</label>
+                        <select id="lesson-select" class="form-select" required aria-required="true" disabled>
+                            <option value="">Select unit first</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg" id="start-btn" style="width: 100%;">
+                        <span class="btn-text">Start Flashcards</span>
+                        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </button>
+                </form>
+
+                <div class="setup-options">
+                    <label class="btn btn-secondary btn-sm">
+                        <input type="checkbox" id="shuffle-words" checked>
+                        <span>🔀 Shuffle Words</span>
+                    </label>
+                    <label class="btn btn-secondary btn-sm">
+                        <input type="checkbox" id="auto-speak">
+                        <span>🔊 Auto Speak</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Dictation Practice Section -->
+            <section class="dictation-area card" id="dictation-section" aria-labelledby="dictation-title" hidden>
+                <header class="dictation-header">
+                    <div class="dictation-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Dictation progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <span class="progress-text" id="progress-text">0 / 0</span>
+                    </div>
+                    <div class="dictation-stats">
+                        <div class="stat correct">
+                            <span class="stat-value" id="correct-count">0</span>
+                            <span class="stat-label">Correct</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="current-streak">0</span>
+                            <span class="stat-label">Streak</span>
+                        </div>
+                        <div class="stat incorrect">
+                            <span class="stat-value" id="incorrect-count">0</span>
+                            <span class="stat-label">Missed</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="dictation-content" id="dictation-content">
+                    <div class="word-display" id="word-display" aria-live="polite" aria-atomic="true">
+                        <span class="sr-only">Current word: </span>
+                    </div>
+                    
+                    <div class="meaning-display" id="meaning-display" hidden aria-live="polite"></div>
+                    
+                    <div class="dictation-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="dictation-input" 
+                            class="dictation-input" 
+                            placeholder="Type the word you hear..."
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-label="Type the word you hear"
+                            disabled
+                        >
+                    </div>
+                    
+                    <div class="dictation-feedback" id="dictation-feedback" aria-live="assertive" aria-atomic="true"></div>
+                    
+                    <div class="dictation-controls">
+                        <button type="button" class="btn btn-primary btn-lg" id="submit-btn" disabled>
+                            <span>Submit</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-lg" id="speak-btn" aria-label="Hear the word again">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            </svg>
+                            <span>Hear Again</span>
+                        </button>
+                        <button type="button" class="btn btn-outline btn-lg" id="skip-btn" aria-label="Skip this word">
+                            Skip
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice Mode Section (Arabic → English) -->
+            <section class="practice-area card" id="practice-section" aria-labelledby="practice-title" hidden>
+                <header class="dictation-header">
+                    <div class="dictation-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Practice progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" id="practice-progress-fill"></div>
+                        </div>
+                        <span class="progress-text" id="practice-progress-text">0 / 0</span>
+                    </div>
+                    <div class="dictation-stats">
+                        <div class="stat correct">
+                            <span class="stat-value" id="practice-correct-count">0</span>
+                            <span class="stat-label">Correct</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="practice-current-streak">0</span>
+                            <span class="stat-label">Streak</span>
+                        </div>
+                        <div class="stat incorrect">
+                            <span class="stat-value" id="practice-incorrect-count">0</span>
+                            <span class="stat-label">Missed</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="practice-content" id="practice-content">
+                    <div class="practice-card">
+                        <div class="practice-arabic">
+                            <label class="practice-label">Meaning (Arabic)</label>
+                            <div id="practice-arabic-word" class="practice-arabic-word"></div>
+                        </div>
+                        <div class="practice-arrow" aria-hidden="true">→</div>
+                        <div class="practice-input-wrapper">
+                            <label class="practice-label">Type English Word</label>
+                            <input 
+                                type="text" 
+                                id="practice-input" 
+                                class="dictation-input" 
+                                placeholder="Type the English word..."
+                                autocomplete="off"
+                                spellcheck="false"
+                                aria-label="Type the English word"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="practice-feedback" id="practice-feedback" aria-live="assertive" aria-atomic="true"></div>
+                    
+                    <div class="practice-controls">
+                        <button type="button" class="btn btn-primary btn-lg" id="practice-check-btn">
+                            <span>Check Answer</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-lg" id="practice-speak-btn" aria-label="Hear the English word">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            </svg>
+                            <span>Hear Word</span>
+                        </button>
+                        <button type="button" class="btn btn-outline btn-lg" id="practice-next-btn" aria-label="Next word" disabled>
+                            <span>Next</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-ghost btn-lg" id="practice-prev-btn" aria-label="Previous word" disabled>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                            <span>Previous</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vocabulary Flashcard Section -->
+            <section class="vocab-area card" id="vocab-section" aria-labelledby="vocab-title" hidden>
+                <header class="dictation-header">
+                    <div class="dictation-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Vocabulary progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" id="vocab-progress-fill"></div>
+                        </div>
+                        <span class="progress-text" id="vocab-progress-text">0 / 0</span>
+                    </div>
+                    <div class="dictation-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="vocab-current">0</span>
+                            <span class="stat-label">Current</span>
+                        </div>
+                        <div class="stat correct">
+                            <span class="stat-value" id="vocab-known">0</span>
+                            <span class="stat-label">Known</span>
+                        </div>
+                        <div class="stat incorrect">
+                            <span class="stat-value" id="vocab-unknown">0</span>
+                            <span class="stat-label">To Learn</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="vocab-content" id="vocab-content">
+                    <!-- Flashcard -->
+                    <div class="flashcard-container">
+                        <div class="flashcard" id="vocab-flashcard" tabindex="0" role="button" aria-label="Flashcard. Press Enter or click to flip.">
+                            <!-- Front Side (English) -->
+                            <div class="flashcard-face flashcard-front">
+                                <div class="flashcard-label">English</div>
+                                <div id="vocab-front-word" class="flashcard-word"></div>
+                                <div class="flashcard-hint">Click or press Space to flip</div>
+                            </div>
+                            <!-- Back Side (Arabic) -->
+                            <div class="flashcard-face flashcard-back">
+                                <div class="flashcard-label">Arabic</div>
+                                <div id="vocab-back-word" class="flashcard-word"></div>
+                                <div class="flashcard-hint">Click or press Space to flip back</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flip Indicator -->
+                    <div id="vocab-flip-hint" class="flip-hint">Click card to flip ↔</div>
+
+                    <!-- Action Buttons -->
+                    <div class="vocab-controls" id="vocab-controls">
+                        <button type="button" class="btn btn-outline btn-lg" id="vocab-prev-btn" aria-label="Previous card" disabled>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                            <span>Previous</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-lg" id="vocab-speak-btn" aria-label="Hear pronunciation">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            </svg>
+                            <span>Hear</span>
+                        </button>
+                        <button type="button" class="btn btn-outline btn-lg" id="vocab-next-btn" aria-label="Next card" disabled>
+                            <span>Next</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Known/Unknown Buttons (shown after flip) -->
+                    <div class="vocab-rate-controls" id="vocab-rate-controls">
+                        <button type="button" class="btn btn-error btn-lg" id="vocab-unknown-btn" aria-label="Mark as unknown">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                            <span>Don't Know</span>
+                        </button>
+                        <button type="button" class="btn btn-success btn-lg" id="vocab-known-btn" aria-label="Mark as known">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Know It</span>
+                        </button>
+                    </div>
+
+                    <!-- Session Complete -->
+                    <div class="vocab-complete" id="vocab-complete">
+                        <div class="vocab-complete-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h3>Session Complete!</h3>
+                        <p class="vocab-complete-message" id="vocab-complete-message"></p>
+                        <div class="vocab-complete-stats">
+                            <div class="vocab-stat-known"><strong id="vocab-final-known">0</strong> Known</div>
+                            <div class="vocab-stat-unknown"><strong id="vocab-final-unknown">0</strong> To Review</div>
+                        </div>
+                        <div class="vocab-controls">
+                            <button type="button" class="btn btn-primary btn-lg" id="vocab-review-unknown-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                Review Unknown
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-lg" id="vocab-new-session-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                New Session
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="dictation-result card" id="result-section" aria-labelledby="result-title" hidden>
+                <div class="dictation-result-content">
+                    <div class="result-icon" id="result-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="result-title" id="result-title">Practice Complete!</h2>
+                    <div class="result-score" id="result-score">0 / 0</div>
+                    <p class="result-message" id="result-message"></p>
+                    <div class="result-details" id="result-details"></div>
+                    <div class="dictation-controls">
+                        <button type="button" class="btn btn-primary btn-lg" id="retry-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M23 4v6h-6"></path>
+                                <path d="M1 20v-6h6"></path>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                            </svg>
+                            Try Again
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-lg" id="new-session-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                            </svg>
+                            New Session
+                        </button>
+                        <button type="button" class="btn btn-outline btn-lg" id="review-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                            Review Mistakes
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tips Section -->
+            <section class="tips-section">
+                <h3 class="tips-section-title">💡 Dictation Tips</h3>
+                <div class="features">
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            </svg>
+                        </div>
+                        <h3>Listen Carefully</h3>
+                        <p>Click "Hear Again" as many times as you need. Focus on each sound in the word.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                            </svg>
+                        </div>
+                        <h3>Type Accurately</h3>
+                        <p>Take your time. Accuracy matters more than speed. Check spelling before submitting.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 4v6h-6"></path>
+                                <path d="M1 20v-6h6"></path>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                            </svg>
+                        </div>
+                        <h3>Review Mistakes</h3>
+                        <p>After each session, review words you missed. Practice them again to improve retention.</p>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+
+            function updateThemeButton() {
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                toggle.innerHTML = isDark
+                    ? '<span aria-hidden="true">☀️</span><span>Light</span>'
+                    : '<span aria-hidden="true">🌙</span><span>Dark</span>';
+                toggle.setAttribute('aria-pressed', String(isDark));
+            }
+
+            updateThemeButton();
+            toggle.addEventListener('click', function() {
+                const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', nextTheme);
+                localStorage.setItem('themePreference', nextTheme);
+                updateThemeButton();
+            });
+        });
+    </script>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; 2027 Contemporary English 4B - Dictation Practice</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="vocabulary.html">Vocabulary</a>
+                <a href="units.html">Units</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vocab-data.js"></script>
+    <script src="dictation.js"></script>
+</body>
+</html>

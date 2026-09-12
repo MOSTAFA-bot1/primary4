@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contemporary English 4B - Vocabulary and Dictation Practice for First Term 2027">
+    <title>Contemporary English 4B - Vocabulary & Dictation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('themePreference');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" aria-label="Contemporary English 4B - Home">
+                <span class="logo-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        <path d="M8 10h8"/>
+                        <path d="M8 14h5"/>
+                    </svg>
+                </span>
+                <div class="logo-text">
+                    <span class="logo-main">Contemporary English 4B</span>
+                    <span class="logo-sub">First Term 2027</span>
+                </div>
+            </a>
+            <div class="header-actions">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+                    <span aria-hidden="true">🌙</span>
+                    <span>Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <ul class="nav-list" role="list">
+                <li class="nav-item"><a href="index.html" class="nav-link active"><span class="nav-icon" aria-hidden="true">🏠</span>Home</a></li>
+                <li class="nav-item"><a href="vocabulary.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📚</span>Vocabulary</a></li>
+                <li class="nav-item"><a href="units.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📋</span>Units</a></li>
+                <li class="nav-item"><a href="dictation.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🎯</span>Dictation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content" role="main">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">Welcome to Contemporary English 4B</h1>
+                <p class="page-subtitle">Master your vocabulary with interactive learning tools designed for First Term 2027</p>
+            </header>
+
+            <!-- Hero Stats -->
+            <section class="card hero-stats">
+                <div class="card-body stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-units">6</div>
+                        <div class="stat-label">Units</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-lessons">23</div>
+                        <div class="stat-label">Lessons</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-words">347</div>
+                        <div class="stat-label">Vocabulary Words</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-hours">∞</div>
+                        <div class="stat-label">Practice Time</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feature Cards -->
+            <section class="features">
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            <path d="M8 10h8"></path>
+                            <path d="M8 14h5"></path>
+                        </svg>
+                    </div>
+                    <h3>Browse Vocabulary</h3>
+                    <p>Explore all 347 vocabulary words organized by 6 units and 23 lessons with Arabic meanings.</p>
+                    <a href="vocabulary.html" class="btn btn-primary">View Vocabulary</a>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Units Overview</h3>
+                    <p>See detailed breakdown of each unit with lesson counts, word counts, and quick navigation.</p>
+                    <a href="units.html" class="btn btn-secondary">Explore Units</a>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Dictation Practice</h3>
+                    <p>Improve spelling and listening with interactive dictation exercises featuring text-to-speech.</p>
+                    <a href="dictation.html" class="btn btn-primary">Start Dictation</a>
+                </article>
+            </section>
+
+            <!-- Quick Dictation Access -->
+            <section class="card quick-dictation-section">
+                <div class="card-header">
+                    <h2>Quick Dictation Access</h2>
+                </div>
+                <div class="card-body">
+                    <p class="section-description">Jump directly into dictation practice for any unit:</p>
+                    <div class="grid grid-3 quick-dictation-grid" id="quick-dictation-units"></div>
+                </div>
+            </section>
+
+            <!-- Recent Activity / Tips -->
+            <section class="tips-info-section">
+                <article class="card">
+                    <div class="card-header">
+                        <h2>💡 Study Tips</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="tip-item">
+                            <div class="tip-icon tip-icon-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                            <div class="tip-content">
+                                <strong>Use Dictation Mode</strong>
+                                <p>Practice spelling by listening to words. Enable "Auto Speak" for hands-free practice.</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon tip-icon-success">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <div class="tip-content">
+                                <strong>Review Mistakes</strong>
+                                <p>After each session, use "Review Mistakes" to focus on words you missed.</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon tip-icon-accent">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <div class="tip-content">
+                                <strong>Daily Practice</strong>
+                                <p>Consistent 10-minute sessions are more effective than occasional long sessions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="card-header">
+                        <h2>📖 Book Information</h2>
+                    </div>
+                    <div class="card-body book-info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Title</div>
+                            <div class="info-value">Contemporary English 4B</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Term</div>
+                            <div class="info-value">First Term 2027</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Edition</div>
+                            <div class="info-value">Distinguished Students</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Units</div>
+                            <div class="info-value">6 Units (1-6)</div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+
+            function updateThemeButton() {
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                toggle.innerHTML = isDark
+                    ? '<span aria-hidden="true">☀️</span><span>Light</span>'
+                    : '<span aria-hidden="true">🌙</span><span>Dark</span>';
+                toggle.setAttribute('aria-pressed', String(isDark));
+            }
+
+            updateThemeButton();
+            toggle.addEventListener('click', function() {
+                const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', nextTheme);
+                localStorage.setItem('themePreference', nextTheme);
+                updateThemeButton();
+            });
+        });
+    </script>
+    
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; 2027 Contemporary English 4B - Vocabulary & Dictation Practice | Designed by <a href="https://mostafa-bot1.github.io/personal/">Mostafa</a></p>
+             
+            <div class="footer-links">
+                <a href="vocabulary.html">Vocabulary</a>
+                <a href="units.html">Units</a>
+                <a href="dictation.html">Dictation</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vocab-data.js"></script>
+    <script>
+        // Initialize stats and quick dictation on home page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update stats
+            const summary = getAllUnitsSummary();
+            const totalUnits = summary.length;
+            const totalLessons = summary.reduce((sum, u) => sum + u.lessonCount, 0);
+            const totalWords = summary.reduce((sum, u) => sum + u.totalWords, 0);
+            
+            document.getElementById('stat-units').textContent = totalUnits;
+            document.getElementById('stat-lessons').textContent = totalLessons;
+            document.getElementById('stat-words').textContent = totalWords;
+            
+            // Quick dictation buttons
+            const container = document.getElementById('quick-dictation-units');
+            summary.forEach(unit => {
+                const btn = document.createElement('a');
+                btn.href = `dictation.html?unit=${unit.number}`;
+                btn.className = 'btn btn-outline';
+                btn.innerHTML = `<strong>${unit.name.replace('Unit ', 'Unit ').split(':')[0]}</strong><br><small>${unit.totalWords} words · ${unit.lessonCount} lessons</small>`;
+                container.appendChild(btn);
+            });
+        });
+    </script>
+</body>
+</html>

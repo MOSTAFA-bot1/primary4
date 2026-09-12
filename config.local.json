@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Exec(New-Item)",
+      "Exec(Move-Item)",
+      "Exec(Remove-Item)",
+      "Exec(python)",
+      "Exec(python3)",
+      "Exec(Get-ChildItem)"
+    ]
+  }
+}

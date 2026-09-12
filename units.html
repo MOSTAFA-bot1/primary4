@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Units overview for Contemporary English 4B - First Term 2027">
+    <title>Units Overview - Contemporary English 4B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('themePreference');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" aria-label="Contemporary English 4B - Home">
+                <span class="logo-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        <path d="M8 10h8"/>
+                        <path d="M8 14h5"/>
+                    </svg>
+                </span>
+                <div class="logo-text">
+                    <span class="logo-main">Contemporary English 4B</span>
+                    <span class="logo-sub">First Term 2027</span>
+                </div>
+            </a>
+            <div class="header-actions">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+                    <span aria-hidden="true">🌙</span>
+                    <span>Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <ul class="nav-list" role="list">
+                <li class="nav-item"><a href="index.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🏠</span>Home</a></li>
+                <li class="nav-item"><a href="vocabulary.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📚</span>Vocabulary</a></li>
+                <li class="nav-item"><a href="units.html" class="nav-link active"><span class="nav-icon" aria-hidden="true">📋</span>Units</a></li>
+                <li class="nav-item"><a href="dictation.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🎯</span>Dictation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content" role="main">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">Units & Lessons Overview</h1>
+                <p class="page-subtitle">Explore all 6 units with 23 lessons and 347 vocabulary words</p>
+            </header>
+
+            <!-- Summary Stats -->
+            <section class="card" style="margin-bottom: 32px; background: linear-gradient(135deg, var(--primary-bg), var(--bg-secondary)); border-color: var(--primary);">
+                <div class="card-body" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; text-align: center;">
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);" id="total-units">6</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">Total Units</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);" id="total-lessons">23</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">Total Lessons</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);" id="total-words">347</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">Total Words</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);" id="avg-words">15</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">Avg Words/Lesson</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Units Grid -->
+            <section id="units-content" aria-live="polite">
+                <div class="loading">
+                    <div class="loading-spinner" aria-hidden="true"></div>
+                    <p>Loading units...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+
+            function updateThemeButton() {
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                toggle.innerHTML = isDark
+                    ? '<span aria-hidden="true">☀️</span><span>Light</span>'
+                    : '<span aria-hidden="true">🌙</span><span>Dark</span>';
+                toggle.setAttribute('aria-pressed', String(isDark));
+            }
+
+            updateThemeButton();
+            toggle.addEventListener('click', function() {
+                const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', nextTheme);
+                localStorage.setItem('themePreference', nextTheme);
+                updateThemeButton();
+            });
+        });
+    </script>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; 2027 Contemporary English 4B - Units Overview</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="vocabulary.html">Vocabulary</a>
+                <a href="dictation.html">Dictation</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vocab-data.js"></script>
+    <script>
+        // Units Page Logic
+        (function() {
+            'use strict';
+            
+            const unitsContent = document.getElementById('units-content');
+            
+            function renderUnits() {
+                const units = getAllUnitsSummary();
+                
+                if (units.length === 0) {
+                    unitsContent.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">📋</div>
+                            <h3>No units data available</h3>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Update summary stats
+                document.getElementById('total-units').textContent = units.length;
+                document.getElementById('total-lessons').textContent = units.reduce((sum, u) => sum + u.lessonCount, 0);
+                document.getElementById('total-words').textContent = units.reduce((sum, u) => sum + u.totalWords, 0);
+                document.getElementById('avg-words').textContent = Math.round(
+                    units.reduce((sum, u) => sum + u.totalWords, 0) / 
+                    units.reduce((sum, u) => sum + u.lessonCount, 0)
+                );
+                
+                let html = '<div class="units-grid">';
+                
+                units.forEach(unit => {
+                    html += `
+                        <article class="unit-card">
+                            <header class="unit-card-header">
+                                <h3>${escapeHtml(unit.name)}</h3>
+                                <div class="unit-card-stats">
+                                    <div class="unit-card-stat">
+                                        <span class="unit-card-stat-value">${unit.lessonCount}</span>
+                                        <span>Lessons</span>
+                                    </div>
+                                    <div class="unit-card-stat">
+                                        <span class="unit-card-stat-value">${unit.totalWords}</span>
+                                        <span>Words</span>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="unit-card-body">
+                                <ul class="lesson-list" role="list">
+                    `;
+                    
+                    unit.lessons.forEach(lesson => {
+                        html += `
+                            <li class="lesson-item">
+                                <div class="lesson-info">
+                                    <span class="lesson-number">${lesson.number}</span>
+                                    <span class="lesson-name">${escapeHtml(lesson.name)}</span>
+                                </div>
+                                <span class="lesson-word-count">${lesson.wordCount} words</span>
+                            </li>
+                        `;
+                    });
+                    
+                    html += `
+                                </ul>
+                                <div class="unit-actions" style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                                    <a href="vocabulary.html?unit=${unit.number}" class="btn btn-primary">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><path d="M8 10h8"></path><path d="M8 14h5"></path></svg>
+                                        View Vocabulary
+                                    </a>
+                                    <a href="dictation.html?unit=${unit.number}" class="btn btn-outline">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                        Start Dictation
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                });
+                
+                html += '</div>';
+                unitsContent.innerHTML = html;
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            renderUnits();
+        })();
+    </script>
+</body>
+</html>

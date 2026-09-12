@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete vocabulary list for Contemporary English 4B - First Term 2027">
+    <title>Vocabulary List - Contemporary English 4B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('themePreference');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" aria-label="Contemporary English 4B - Home">
+                <span class="logo-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        <path d="M8 10h8"/>
+                        <path d="M8 14h5"/>
+                    </svg>
+                </span>
+                <div class="logo-text">
+                    <span class="logo-main">Contemporary English 4B</span>
+                    <span class="logo-sub">First Term 2027</span>
+                </div>
+            </a>
+            <div class="header-actions">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+                    <span aria-hidden="true">🌙</span>
+                    <span>Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <ul class="nav-list" role="list">
+                <li class="nav-item"><a href="index.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🏠</span>Home</a></li>
+                <li class="nav-item"><a href="vocabulary.html" class="nav-link active"><span class="nav-icon" aria-hidden="true">📚</span>Vocabulary</a></li>
+                <li class="nav-item"><a href="units.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📋</span>Units</a></li>
+                <li class="nav-item"><a href="dictation.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🎯</span>Dictation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content" role="main">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">Complete Vocabulary List</h1>
+                <p class="page-subtitle">All 347 vocabulary words from 6 units and 23 lessons, organized for easy browsing</p>
+            </header>
+
+            <!-- Search & Filter -->
+            <section class="card" style="margin-bottom: 24px;">
+                <div class="card-body" style="padding: 24px;">
+                    <div class="search-filter">
+                        <div class="search-wrapper" style="flex: 1; min-width: 300px;">
+                            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="vocab-search" class="search-input" placeholder="Search vocabulary (English or Arabic)..." aria-label="Search vocabulary">
+                        </div>
+                        <select id="unit-filter" class="form-select" style="min-width: 220px; max-width: 300px;" aria-label="Filter by unit">
+                            <option value="">All Units</option>
+                        </select>
+                        <select id="lesson-filter" class="form-select" style="min-width: 220px; max-width: 300px;" aria-label="Filter by lesson" disabled>
+                            <option value="">Select unit first</option>
+                        </select>
+                        <span id="result-count" style="color: var(--text-muted); font-size: 0.875rem; white-space: nowrap; align-self: center;"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vocabulary Content -->
+            <section id="vocabulary-content" aria-live="polite">
+                <div class="loading">
+                    <div class="loading-spinner" aria-hidden="true"></div>
+                    <p>Loading vocabulary...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+
+            function updateThemeButton() {
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                toggle.innerHTML = isDark
+                    ? '<span aria-hidden="true">☀️</span><span>Light</span>'
+                    : '<span aria-hidden="true">🌙</span><span>Dark</span>';
+                toggle.setAttribute('aria-pressed', String(isDark));
+            }
+
+            updateThemeButton();
+            toggle.addEventListener('click', function() {
+                const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', nextTheme);
+                localStorage.setItem('themePreference', nextTheme);
+                updateThemeButton();
+            });
+        });
+    </script>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; 2027 Contemporary English 4B - Vocabulary List</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="units.html">Units</a>
+                <a href="dictation.html">Dictation</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vocab-data.js"></script>
+    <script>
+        // Vocabulary Page Logic
+        (function() {
+            'use strict';
+            
+            const vocabContent = document.getElementById('vocabulary-content');
+            const searchInput = document.getElementById('vocab-search');
+            const unitFilter = document.getElementById('unit-filter');
+            const lessonFilter = document.getElementById('lesson-filter');
+            const resultCount = document.getElementById('result-count');
+            
+            let allVocab = [];
+            let currentFilter = { unit: '', lesson: '', search: '' };
+            
+            function init() {
+                allVocab = getAllVocabulary();
+                populateFilters();
+                renderVocabulary();
+                updateResultCount(allVocab.length);
+            }
+            
+            function populateFilters() {
+                const units = getAllUnitsSummary();
+                unitFilter.innerHTML = '<option value="">All Units</option>';
+                units.forEach(unit => {
+                    const opt = document.createElement('option');
+                    opt.value = unit.number;
+                    opt.textContent = `${unit.name} (${unit.totalWords} words)`;
+                    unitFilter.appendChild(opt);
+                });
+            }
+            
+            function updateLessonFilter(unitNum) {
+                lessonFilter.innerHTML = '<option value="">All Lessons</option>';
+                lessonFilter.disabled = !unitNum;
+                
+                if (!unitNum) return;
+                
+                const lessons = getUnitLessons(parseInt(unitNum));
+                lessons.forEach(lesson => {
+                    const opt = document.createElement('option');
+                    opt.value = lesson.number;
+                    opt.textContent = `Lesson ${lesson.number}: ${lesson.name} (${lesson.wordCount} words)`;
+                    lessonFilter.appendChild(opt);
+                });
+            }
+            
+            function filterVocabulary() {
+                const search = currentFilter.search.toLowerCase().trim();
+                const unit = currentFilter.unit;
+                const lesson = currentFilter.lesson;
+                
+                return allVocab.filter(item => {
+                    if (unit && item.unit != unit) return false;
+                    if (lesson && item.lesson != lesson) return false;
+                    if (search) {
+                        const wordMatch = item.word.toLowerCase().includes(search);
+                        const meaningMatch = item.meaning.toLowerCase().includes(search);
+                        if (!wordMatch && !meaningMatch) return false;
+                    }
+                    return true;
+                });
+            }
+            
+            function renderVocabulary(filteredData = null) {
+                const data = filteredData || filterVocabulary();
+                updateResultCount(data.length);
+                
+                if (data.length === 0) {
+                    vocabContent.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">🔍</div>
+                            <h3>No vocabulary found</h3>
+                            <p>Try adjusting your search or filters</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Group by unit then lesson
+                const byUnit = {};
+                data.forEach(item => {
+                    if (!byUnit[item.unit]) {
+                        byUnit[item.unit] = { name: item.unitName, lessons: {} };
+                    }
+                    if (!byUnit[item.unit].lessons[item.lesson]) {
+                        byUnit[item.unit].lessons[item.lesson] = { name: item.lessonName, words: [] };
+                    }
+                    byUnit[item.unit].lessons[item.lesson].words.push({ word: item.word, meaning: item.meaning });
+                });
+                
+                let html = '';
+                const unitNumbers = Object.keys(byUnit).sort((a, b) => parseInt(a) - parseInt(b));
+                
+                unitNumbers.forEach(unitNum => {
+                    const unit = byUnit[unitNum];
+                    html += `
+                        <article class="vocab-unit" data-unit="${unitNum}">
+                            <header class="unit-header" onclick="toggleUnit(${unitNum})" role="button" tabindex="0" aria-expanded="false" aria-controls="unit-content-${unitNum}">
+                                <div class="unit-title">
+                                    <span class="unit-badge">Unit ${unitNum}</span>
+                                    ${unit.name}
+                                </div>
+                                <div class="unit-stats">
+                                    <span>${Object.keys(unit.lessons).length} lessons</span>
+                                    <span>${data.filter(d => d.unit == unitNum).length} words</span>
+                                </div>
+                                <span class="unit-toggle" aria-hidden="true">▼</span>
+                            </header>
+                            <div class="unit-content" id="unit-content-${unitNum}" role="region" aria-label="Unit ${unitNum} vocabulary">
+                    `;
+                    
+                    const lessonNumbers = Object.keys(unit.lessons).sort((a, b) => parseInt(a) - parseInt(b));
+                    lessonNumbers.forEach(lessonNum => {
+                        const lesson = unit.lessons[lessonNum];
+                        html += `
+                            <div class="lesson">
+                                <header class="lesson-header">
+                                    <span class="lesson-badge">Lesson ${lessonNum}</span>
+                                    <h4 class="lesson-title">${lesson.name}</h4>
+                                </header>
+                                <div class="vocab-grid">
+                        `;
+                        
+                        lesson.words.forEach(item => {
+                            html += `
+                                <div class="vocab-card" tabindex="0">
+                                    <span class="vocab-word">${escapeHtml(item.word)}</span>
+                                    ${item.meaning ? `<span class="vocab-meaning">${escapeHtml(item.meaning)}</span>` : ''}
+                                </div>
+                            `;
+                        });
+                        
+                        html += `
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                            </div>
+                        </article>
+                    `;
+                });
+                
+                vocabContent.innerHTML = html;
+                
+                // Add keyboard support for unit headers
+                document.querySelectorAll('.unit-header').forEach(header => {
+                    header.addEventListener('keydown', e => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            header.click();
+                        }
+                    });
+                });
+            }
+            
+            function updateResultCount(count) {
+                resultCount.textContent = `${count} word${count !== 1 ? 's' : ''} found`;
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            // Event listeners
+            searchInput.addEventListener('input', debounce(() => {
+                currentFilter.search = searchInput.value;
+                renderVocabulary();
+            }, 150));
+            
+            unitFilter.addEventListener('change', () => {
+                currentFilter.unit = unitFilter.value;
+                currentFilter.lesson = '';
+                updateLessonFilter(unitFilter.value);
+                lessonFilter.value = '';
+                renderVocabulary();
+            });
+            
+            lessonFilter.addEventListener('change', () => {
+                currentFilter.lesson = lessonFilter.value;
+                renderVocabulary();
+            });
+            
+            function debounce(fn, delay) {
+                let timeoutId;
+                return (...args) => {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+                };
+            }
+            
+            // Expose toggleUnit globally
+            window.toggleUnit = function(unitNum) {
+                const header = document.querySelector(`.vocab-unit[data-unit="${unitNum}"] .unit-header`);
+                const content = document.getElementById(`unit-content-${unitNum}`);
+                
+                if (!header || !content) return;
+                
+                const isOpen = header.classList.toggle('open');
+                content.classList.toggle('open');
+                header.setAttribute('aria-expanded', isOpen);
+            };
+            
+            // Check URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            const unitParam = urlParams.get('unit');
+            if (unitParam) {
+                unitFilter.value = unitParam;
+                currentFilter.unit = unitParam;
+                updateLessonFilter(unitParam);
+            }
+            
+            init();
+        })();
+    </script>
+</body>
+</html>
